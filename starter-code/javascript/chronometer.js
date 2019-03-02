@@ -1,40 +1,60 @@
 // Constructor
-// function Chronometer() {
+function Chronometer() { 
+    this.currentTime = 0
+    this.intervalId = 0
+    this.intervalSecond = 0
+    this.clockIsStopped = 0
+    this.currentTimeMiliSeconds = 0
+    this.miliSeconds = 0
+}    
 
-// }
+Chronometer.prototype.startClick = function () {
+    let self = this;
+    this.clockIsStopped = false 
+    this.intervalId = setInterval(function(){
+        self.currentTime = self.currentTime + 1 
+        self.setTime()
+    },1000)
+ };
 
-// Chronometer.prototype.startClick = function () {
+Chronometer.prototype.setMinutes = function () {
+  return parseInt(this.currentTime/60)
+};
 
-// };
+Chronometer.prototype.setSeconds = function () {
+    return parseInt(this.currentTime%60)
+};
 
-// Chronometer.prototype.setMinutes = function () {
-  
-// };
+Chronometer.prototype.twoDigitsNumber = function (time) {
+    var correctedTime = 0
+    if(time < 10){
+        correctedTime = ("0"+time)
+    }    
+    else{
+        correctedTime = time.toString()
+    }
+    
+    return correctedTime
+};
 
-// Chronometer.prototype.setSeconds = function () {
-  
-// };
+Chronometer.prototype.setTime = function () {
+   this.minutes = this.twoDigitsNumber(this.setMinutes())
+   this.seconds = this.twoDigitsNumber(this.setSeconds())
+};
 
-// Chronometer.prototype.twoDigitsNumber = function () {
-  
-// };
+Chronometer.prototype.setMilliseconds = function () {
 
-// Chronometer.prototype.setTime = function () {
+};
 
-// };
+Chronometer.prototype.stopClick = function () {
+    clearInterval(this.intervalId)
+    clearInterval(this.intervalSecond)
+    this.clockIsStopped = true
+  };
 
-// Chronometer.prototype.setMilliseconds = function () {
+Chronometer.prototype.resetClick = function () {
+    this.currentTime = 0
+};
 
-// };
-
-// Chronometer.prototype.stopClick = function () {
-  
-// };
-
-// Chronometer.prototype.resetClick = function () {
-
-// };
-
-// Chronometer.prototype.splitClick = function () {
-
-// };
+Chronometer.prototype.splitClick = function () {
+};
